@@ -22,18 +22,26 @@ public class ActivityOne extends Activity {
 
 	// Lifecycle counters
 
-	// TODO:
-	// Create variables named
-	// mCreate, mRestart, mStart and mResume
-	// to count calls to onCreate(), onRestart(), onStart() and
-	// onResume(). These variables should not be defined as static.
+    // TODO:
+    // Create variables named
+    // mCreate, mRestart, mStart and mResume
+    // to count calls to onCreate(), onRestart(), onStart() and
+    // onResume(). These variables should not be defined as static.
+    private int mCreate;
+    private int mRestart;
+    private int mStart;
+    private int mResume;
 
 	// You will need to increment these variables' values when their
 	// corresponding lifecycle methods get called.
 
-	// TODO: Create variables for each of the TextViews
-	// named mTvCreate, mTvRestart, mTvStart, mTvResume.
-	// for displaying the current count of each counter variable
+    // TODO: Create variables for each of the TextViews
+    // named mTvCreate, mTvRestart, mTvStart, mTvResume.
+    // for displaying the current count of each counter variable
+    private TextView mTvCreate;
+    private TextView mTvRestart;
+    private TextView mTvStart;
+    private TextView mTvResume;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +50,10 @@ public class ActivityOne extends Activity {
 
 		// TODO: Assign the appropriate TextViews to the TextView variables
 		// Hint: Access the TextView by calling Activity's findViewById()
-		// textView1 = (TextView) findViewById(R.id.textView1);
+		 mTvCreate = (TextView) findViewById(R.id.create);
+		 mTvRestart = (TextView) findViewById(R.id.restart);
+		 mTvStart = (TextView) findViewById(R.id.start);
+		 mTvResume = (TextView) findViewById(R.id.resume);
 
 		Button launchActivityTwoButton = (Button) findViewById(R.id.bLaunchActivityTwo);
 		launchActivityTwoButton.setOnClickListener(new OnClickListener() {
@@ -55,9 +66,10 @@ public class ActivityOne extends Activity {
 
 				// Create an intent stating which Activity you would like to
 				// start
-				Intent intent = null;
+				Intent intent = new Intent(getBaseContext(), ActivityTwo.class);
 
 				// Launch the Activity using the intent
+                startActivity(intent);
 
 			}
 		});
@@ -76,7 +88,9 @@ public class ActivityOne extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
-		// Update the user interface via the displayCounts() method
+        mCreate++;
+        // Update the user interface via the displayCounts() method
+        displayCounts();
 
 	}
 
@@ -91,7 +105,9 @@ public class ActivityOne extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
-		// Update the user interface
+        mStart++;
+        // Update the user interface
+        displayCounts();
 
 	}
 
@@ -104,7 +120,9 @@ public class ActivityOne extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
-		// Update the user interface
+        mResume++;
+        // Update the user interface
+        displayCounts();
 
 	}
 
@@ -133,7 +151,9 @@ public class ActivityOne extends Activity {
 
 		// TODO:
 		// Update the appropriate count variable
-		// Update the user interface
+        mRestart++;
+        // Update the user interface
+        displayCounts();
 
 	}
 
@@ -160,11 +180,9 @@ public class ActivityOne extends Activity {
 	public void displayCounts() {
 
 		// TODO - uncomment these lines
-	/*
 		mTvCreate.setText("onCreate() calls: " + mCreate);
 		mTvStart.setText("onStart() calls: " + mStart);
 		mTvResume.setText("onResume() calls: " + mResume);
 		mTvRestart.setText("onRestart() calls: " + mRestart);
-	*/
 	}
 }
