@@ -6,20 +6,20 @@ import android.widget.TextView;
 
 public class MyBrowserActivity extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.my_browser_activity);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.my_browser_activity);
 
-		// Save the String passed with the intent
-		String url = getIntent().getDataString();
+        // Save the String passed with the intent
+        String url = getIntent().getDataString();
 
-		if (null == url)
-			url = "No Data Provided";
+        if (null == url)
+            url = "No Data Provided";
 
-		// Get a reference to the TextView and set the text it to the String
-		TextView textView = (TextView) findViewById(R.id.url);
-		textView.setText(url);
-	}
+        // Get a reference to the TextView and set the text it to the String
+        TextView textView = (TextView) findViewById(R.id.url);
+        textView.setText(url);
+    }
 
 }

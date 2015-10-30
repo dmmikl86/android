@@ -2,6 +2,8 @@ package course.labs.intentslab;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class ActivityLoaderActivity extends Activity {
 
@@ -37,9 +41,7 @@ public class ActivityLoaderActivity extends Activity {
             // Call startExplicitActivation() when pressed
             @Override
             public void onClick(View v) {
-
                 startExplicitActivation();
-
             }
         });
 
@@ -50,9 +52,7 @@ public class ActivityLoaderActivity extends Activity {
             // Call startImplicitActivation() when pressed
             @Override
             public void onClick(View v) {
-
                 startImplicitActivation();
-
             }
         });
 
@@ -65,12 +65,9 @@ public class ActivityLoaderActivity extends Activity {
 
         Log.i(TAG, "Entered startExplicitActivation()");
 
-        // TODO - Create a new intent to launch the ExplicitlyLoadedActivity class
-        Intent explicitIntent = null;
+        Intent explicitIntent = new Intent(ActivityLoaderActivity.this, ExplicitlyLoadedActivity.class);
 
-        // TODO - Start an Activity using that intent and the request code defined above
-
-
+        startActivityForResult(explicitIntent, GET_TEXT_REQUEST_CODE);
     }
 
     // Start a Browser Activity to view a web page or its URL
@@ -79,23 +76,22 @@ public class ActivityLoaderActivity extends Activity {
 
         Log.i(TAG, "Entered startImplicitActivation()");
 
-        // TODO - Create a base intent for viewing a URL
         // (HINT:  second parameter uses Uri.parse())
-
-        Intent baseIntent = null;
-
-        // TODO - Create a chooser intent, for choosing which Activity
-        // will carry out the baseIntent
-        // (HINT: Use the Intent class' createChooser() method)
-        Intent chooserIntent = null;
-
+        Uri webPage = Uri.parse(URL);
+        Intent baseIntent = new Intent(Intent.ACTION_VIEW, webPage);
+        Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
 
         Log.i(TAG, "Chooser Intent Action:" + chooserIntent.getAction());
 
+        // Verify it resolves
+        PackageManager packageManager = getPackageManager();
+        List<ResolveInfo> activities = packageManager.queryIntentActivities(chooserIntent, 0);
+        boolean isIntentSafe = activities.size() > 0;
 
-        // TODO - Start the chooser Activity, using the chooser intent
-
-
+        // Start an activity if it's safe
+        if (isIntentSafe) {
+            startActivity(chooserIntent);
+        }
     }
 
     @Override
@@ -103,10 +99,10 @@ public class ActivityLoaderActivity extends Activity {
 
         Log.i(TAG, "Entered onActivityResult()");
 
-        // TODO - Process the result only if this method received both a
         // RESULT_OK result code and a recognized request code
-        // If so, update the Textview showing the user-entered text.
-
-
+        if (resultCode == Activity.RESULT_OK && requestCode == GET_TEXT_REQUEST_CODE) {
+            // If so, update the Textview showing the user-entered text.
+            mUserTextView.setText(data.getStringExtra(ExplicitlyLoadedActivity.TEXT));
+        }
     }
 }
