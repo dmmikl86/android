@@ -1,0 +1,2 @@
+include ':app'
+include ':lab3b_DangerousApp'
