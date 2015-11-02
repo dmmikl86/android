@@ -1,0 +1,11 @@
+/.idea
+/gradle
+/.gradle
+*.iml
+
+# Local configuration file (sdk path, etc)
+local.properties
+/*/build/
+build/
+
+app/libs/
