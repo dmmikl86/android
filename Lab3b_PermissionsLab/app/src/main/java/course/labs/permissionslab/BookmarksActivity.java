@@ -53,8 +53,7 @@ public class BookmarksActivity extends Activity {
 
         String text = "";
 
-        Cursor query = getContentResolver().query(Browser.BOOKMARKS_URI,
-                projection, null, null, null);
+        Cursor query = getContentResolver().query(Browser.BOOKMARKS_URI, projection, null, null, null);
 
         query.moveToFirst();
         while (query.moveToNext()) {
@@ -78,9 +77,8 @@ public class BookmarksActivity extends Activity {
 
         Log.i(TAG, "Entered startGoToDangerousActivity()");
 
-        // TODO - Start the GoToDangerousActivity
-
-
+        Intent intent = new Intent(getBaseContext(), GoToDangerousActivity.class);
+        startActivity(intent);
     }
 
 }
