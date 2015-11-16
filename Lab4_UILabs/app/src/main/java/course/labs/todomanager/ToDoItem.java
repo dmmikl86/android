@@ -1,11 +1,11 @@
 package course.labs.todomanager;
 
+import android.content.Intent;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import android.content.Intent;
 
 public class ToDoItem {
 
@@ -15,13 +15,9 @@ public class ToDoItem {
         LOW, MED, HIGH
     }
 
-    ;
-
     public enum Status {
         NOTDONE, DONE
     }
-
-    ;
 
     public final static String TITLE = "title";
     public final static String PRIORITY = "priority";

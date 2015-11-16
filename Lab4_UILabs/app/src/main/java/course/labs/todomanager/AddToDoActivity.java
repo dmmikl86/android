@@ -92,22 +92,23 @@ public class AddToDoActivity extends Activity {
             public void onClick(View v) {
 
 
-                // TODO - Indicate result and finish
-
-
+                // TODO --- DONE --- - Indicate result and finish
+                setResult(RESULT_CANCELED);
+                finish();
             }
         });
 
-        // TODO - Set up OnClickListener for the Reset Button
+        // TODO --- DONE --- - Set up OnClickListener for the Reset Button
         final Button resetButton = (Button) findViewById(R.id.resetButton);
         resetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                // TODO - Reset data to default values
-
-
+                // TODO --- DONE --- - Reset data to default values
+                mTitleText.setText("");
+                mDefaultStatusButton.toggle();
+                mDefaultPriorityButton.toggle();
                 // reset date and time
                 setDefaultDateTime();
 
@@ -125,16 +126,14 @@ public class AddToDoActivity extends Activity {
                 // gather ToDoItem data
 
 
-                // TODO - Get the current Priority
-                Priority priority = null;
+                // TODO --- DONE --- - Get the current Priority
+                Priority priority = getPriority();
 
-                // TODO - Get the current Status
-                Status status = null;
+                // TODO --- DONE --- - Get the current Status
+                Status status = getStatus();
 
-                // TODO - Get the current ToDoItem Title
-
-
-                String titleString = null;
+                // TODO --- DONE --- - Get the current ToDoItem Title
+                String titleString = getToDoTitle();
 
 
                 // Construct the Date string
@@ -142,12 +141,11 @@ public class AddToDoActivity extends Activity {
 
                 // Package ToDoItem data into an Intent
                 Intent data = new Intent();
-                ToDoItem.packageIntent(data, titleString, priority, status,
-                        fullDate);
+                ToDoItem.packageIntent(data, titleString, priority, status, fullDate);
 
-                // TODO - return data Intent and finish
-
-
+                // TODO --- DONE --- - return data Intent and finish
+                setResult(RESULT_OK, data);
+                finish();
             }
         });
     }
